@@ -26,3 +26,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments',
+                             verbose_name='Пост')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments',
+                             verbose_name='Автор')
+    text = models.TextField('Текст')
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+    def __str__(self):
+        return f'{self.post} --> {self.user}'

@@ -48,3 +48,13 @@ class User(AbstractBaseUser):
 
     def has_perm(self, obj=None):
         return self.is_staff
+
+    def create_activation_code(self):
+        from django.utils.crypto import get_random_string
+        self.activation_code = get_random_string(6)
+        self.save()
+
+    def send_activation_mail(self):
+        from django.core.mail import send_mail
+        message = f'Ваш код активации: {self.activation_code}'
+        send_mail('Активация аккаунта', message, 'test@test.com', [self.email])
