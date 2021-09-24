@@ -47,3 +47,4 @@ class CommentsViewSet(mixins.CreateModelMixin,
         if self.action == 'create':
             return [IsAuthenticated()]
         return [IsCommentAuthor()]
+

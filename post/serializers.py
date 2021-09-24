@@ -6,10 +6,12 @@ from .models import Post, Comment
 class PostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'title', 'author', 'body', 'publish')
+        fields = ('id', 'title', 'author', 'body', 'publish', 'image')
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, allow_null=True, required=False)
+
     class Meta:
         model = Post
         fields = '__all__'
@@ -43,3 +45,4 @@ class CommentSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         validated_data['user'] = request.user
         return super().create(validated_data)
+
