@@ -6,7 +6,7 @@ from .models import Post, Comment, Rating, Favourite
 class PostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('id', 'title', 'user', 'body', 'publish', 'avr_rating')
+        fields = ('id', 'title', 'user', 'body', 'publish', 'image', 'avr_rating')
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -15,6 +15,8 @@ class PostListSerializer(serializers.ModelSerializer):
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, allow_null=True, required=False)
+
     class Meta:
         model = Post
         fields = '__all__'

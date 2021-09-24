@@ -58,3 +58,4 @@ class User(AbstractBaseUser):
         from django.core.mail import send_mail
         message = f'Ваш код активации: {self.activation_code}'
         send_mail('Активация аккаунта', message, 'test@test.com', [self.email])
+
